@@ -29,7 +29,7 @@
             height: auto;
             margin: 10px 0;
         }
-        .save-button {
+        .button {
             background-color: cyan;
             color: black;
             border: none;
@@ -38,8 +38,12 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .save-button:hover {
+        .button:hover {
             background-color: lightblue;
+        }
+        #imageContainer {
+            display: none;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -49,17 +53,13 @@
         <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
         <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
 
-        <!-- Exibição das imagens -->
         <h2>Última imagem vista:</h2>
         <img id="lastImage" src="" alt="Última imagem aberta">
         
-        <h2>Instruções</h2>
-        <p id="savedInstructions">Nenhuma instrução salva.</p>
-
-        <h2>Escolha uma imagem</h2>
+        <button class="button" onclick="toggleInstructions()">Instruções</button>
         <div id="imageContainer"></div>
 
-        <button class="save-button" onclick="saveData()">Salvar Última Imagem e Instruções</button>
+        <button class="button" onclick="saveData()">Salvar Última Imagem e Instruções</button>
     </div>
 
     <audio id="alarm" src="alarme.wav"></audio>
@@ -98,11 +98,20 @@
             }
         }
 
+        // Mostrar ou ocultar as imagens ao clicar no botão "Instruções"
+        function toggleInstructions() {
+            let container = document.getElementById("imageContainer");
+            if (container.style.display === "none" || container.style.display === "") {
+                container.style.display = "block";
+            } else {
+                container.style.display = "none";
+            }
+        }
+
         // Salvar dados (Última imagem e instruções)
         function saveData() {
             let instructionText = prompt("Digite uma instrução para salvar:");
             if (instructionText) {
-                document.getElementById("savedInstructions").textContent = instructionText;
                 localStorage.setItem("savedInstructions", instructionText);
             }
         }
@@ -116,11 +125,6 @@
                 document.getElementById("lastImage").src = lastImage;
             } else {
                 document.getElementById("lastImage").src = "instrucao1.png"; // Imagem padrão
-            }
-
-            let savedInstructions = localStorage.getItem("savedInstructions");
-            if (savedInstructions) {
-                document.getElementById("savedInstructions").textContent = savedInstructions;
             }
         };
     </script>
