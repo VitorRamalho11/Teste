@@ -29,6 +29,18 @@
             height: auto;
             margin: 10px 0;
         }
+        .save-button {
+            background-color: cyan;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .save-button:hover {
+            background-color: lightblue;
+        }
     </style>
 </head>
 <body>
@@ -37,32 +49,23 @@
         <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
         <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
 
-        <!-- Exibição das imagens diretamente no diretório principal -->
-        <img src="instrucao1.png" alt="Instrução 1">
-        <img src="instrucao2.png" alt="Instrução 2">
-        <img src="instrucao3.png" alt="Instrução 3">
-        <img src="instrucao4.png" alt="Instrução 4">
-        <img src="instrucao5.png" alt="Instrução 5">
-        <img src="instrucao6.png" alt="Instrução 6">
-        <img src="instrucao7.png" alt="Instrução 7">
-        <img src="instrucao8.png" alt="Instrução 8">
-        <img src="instrucao9.png" alt="Instrução 9">
-        <img src="instrucao10.png" alt="Instrução 10">
-        <img src="instrucao11.png" alt="Instrução 11">
-        <img src="instrucao12.png" alt="Instrução 12">
-        <img src="instrucao13.png" alt="Instrução 13">
-        <img src="instrucao14.png" alt="Instrução 14">
-        <img src="instrucao15.png" alt="Instrução 15">
-        <img src="instrucao16.png" alt="Instrução 16">
-        <img src="instrucao17.png" alt="Instrução 17">
-        <img src="instrucao18.png" alt="Instrução 18">
-        <img src="instrucao19.png" alt="Instrução 19">
-        <img src="instrucao20.png" alt="Instrução 20">
+        <!-- Exibição das imagens -->
+        <h2>Última imagem vista:</h2>
+        <img id="lastImage" src="" alt="Última imagem aberta">
+        
+        <h2>Instruções</h2>
+        <p id="savedInstructions">Nenhuma instrução salva.</p>
+
+        <h2>Escolha uma imagem</h2>
+        <div id="imageContainer"></div>
+
+        <button class="save-button" onclick="saveData()">Salvar Última Imagem e Instruções</button>
     </div>
 
     <audio id="alarm" src="alarme.wav"></audio>
 
     <script>
+        // Temporizador
         function startTimer(seconds, elementId) {
             let timerElement = document.getElementById(elementId);
             let timeLeft = seconds;
@@ -78,6 +81,48 @@
                 }
             }, 1000);
         }
+
+        // Criar imagens dinamicamente
+        function loadImages() {
+            let container = document.getElementById("imageContainer");
+
+            for (let i = 1; i <= 20; i++) {
+                let img = document.createElement("img");
+                img.src = `instrucao${i}.png`;
+                img.alt = `Instrução ${i}`;
+                img.onclick = function() {
+                    document.getElementById("lastImage").src = img.src;
+                    localStorage.setItem("lastImage", img.src);
+                };
+                container.appendChild(img);
+            }
+        }
+
+        // Salvar dados (Última imagem e instruções)
+        function saveData() {
+            let instructionText = prompt("Digite uma instrução para salvar:");
+            if (instructionText) {
+                document.getElementById("savedInstructions").textContent = instructionText;
+                localStorage.setItem("savedInstructions", instructionText);
+            }
+        }
+
+        // Carregar dados salvos
+        window.onload = function() {
+            loadImages();
+            
+            let lastImage = localStorage.getItem("lastImage");
+            if (lastImage) {
+                document.getElementById("lastImage").src = lastImage;
+            } else {
+                document.getElementById("lastImage").src = "instrucao1.png"; // Imagem padrão
+            }
+
+            let savedInstructions = localStorage.getItem("savedInstructions");
+            if (savedInstructions) {
+                document.getElementById("savedInstructions").textContent = savedInstructions;
+            }
+        };
     </script>
 </body>
 </html>
