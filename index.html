@@ -19,16 +19,6 @@
             margin: 20px;
             cursor: pointer;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0;
-        }
         .button {
             background-color: cyan;
             color: black;
@@ -45,15 +35,11 @@
 </head>
 <body>
     <h1>Temporizador</h1>
-    <div class="container">
-        <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
-        <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
 
-        <h2>Última imagem vista:</h2>
-        <img id="lastImage" src="" alt="Última imagem aberta">
-        
-        <button class="button" onclick="openInstructions()">Instruções</button>
-    </div>
+    <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
+    <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
+
+    <button class="button" onclick="openInstructions()">Instruções</button>
 
     <audio id="alarm" src="alarme.wav"></audio>
 
@@ -78,8 +64,10 @@
         // Abrir instruções em tela cheia
         function openInstructions() {
             let lastImage = localStorage.getItem("lastImage") || "instrucao1.png";
-            let win = window.open("", "_blank", "fullscreen=yes");
+            let currentIndex = parseInt(lastImage.match(/\d+/)) || 1;
             
+            let win = window.open("", "_blank", "fullscreen=yes");
+
             win.document.write(`
                 <html>
                 <head>
@@ -120,13 +108,13 @@
                 <body>
                     <div class="container">
                         <button class="button" onclick="prevImage()">Anterior</button>
-                        <img id="instructionImage" src="${lastImage}" alt="Instrução">
+                        <img id="instructionImage" src="instrucao${currentIndex}.png" alt="Instrução">
                         <button class="button" onclick="nextImage()">Próxima</button>
                         <button class="button" onclick="window.close()">Fechar</button>
                     </div>
 
                     <script>
-                        let currentIndex = parseInt(${lastImage.match(/\d+/) || 1});
+                        let currentIndex = ${currentIndex};
                         
                         function updateImage() {
                             document.getElementById("instructionImage").src = "instrucao" + currentIndex + ".png";
@@ -146,17 +134,11 @@
                                 updateImage();
                             }
                         }
-                    </script>
+                    <\/script>
                 </body>
                 </html>
             `);
         }
-
-        // Carregar última imagem ao iniciar
-        window.onload = function() {
-            let lastImage = localStorage.getItem("lastImage") || "instrucao1.png";
-            document.getElementById("lastImage").src = lastImage;
-        };
     </script>
 </body>
 </html>
