@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador</title>
+    <style>
+        body {
+            background-color: black;
+            color: cyan;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .timer {
+            font-size: 48px;
+            margin: 20px;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temporizador</h1>
+    <div class="container">
+        <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
+        <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
+
+        <!-- Exibição das imagens diretamente no diretório principal -->
+        <img src="instrucao1.png" alt="Instrução 1">
+        <img src="instrucao2.png" alt="Instrução 2">
+        <img src="instrucao3.png" alt="Instrução 3">
+        <img src="instrucao4.png" alt="Instrução 4">
+        <img src="instrucao5.png" alt="Instrução 5">
+        <img src="instrucao6.png" alt="Instrução 6">
+        <img src="instrucao7.png" alt="Instrução 7">
+        <img src="instrucao8.png" alt="Instrução 8">
+        <img src="instrucao9.png" alt="Instrução 9">
+        <img src="instrucao10.png" alt="Instrução 10">
+        <img src="instrucao11.png" alt="Instrução 11">
+        <img src="instrucao12.png" alt="Instrução 12">
+        <img src="instrucao13.png" alt="Instrução 13">
+        <img src="instrucao14.png" alt="Instrução 14">
+        <img src="instrucao15.png" alt="Instrução 15">
+        <img src="instrucao16.png" alt="Instrução 16">
+        <img src="instrucao17.png" alt="Instrução 17">
+        <img src="instrucao18.png" alt="Instrução 18">
+        <img src="instrucao19.png" alt="Instrução 19">
+        <img src="instrucao20.png" alt="Instrução 20">
+    </div>
+
+    <audio id="alarm" src="alarme.wav"></audio>
+
+    <script>
+        function startTimer(seconds, elementId) {
+            let timerElement = document.getElementById(elementId);
+            let timeLeft = seconds;
+
+            let countdown = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft + "s";
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('alarm').play();
+                    timerElement.textContent = seconds + "s";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
