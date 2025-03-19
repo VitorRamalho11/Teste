@@ -41,10 +41,6 @@
         .button:hover {
             background-color: lightblue;
         }
-        #imageContainer {
-            display: none;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -56,10 +52,7 @@
         <h2>Última imagem vista:</h2>
         <img id="lastImage" src="" alt="Última imagem aberta">
         
-        <button class="button" onclick="toggleInstructions()">Instruções</button>
-        <div id="imageContainer"></div>
-
-        <button class="button" onclick="saveData()">Salvar Última Imagem e Instruções</button>
+        <button class="button" onclick="openInstructions()">Instruções</button>
     </div>
 
     <audio id="alarm" src="alarme.wav"></audio>
@@ -82,50 +75,87 @@
             }, 1000);
         }
 
-        // Criar imagens dinamicamente
-        function loadImages() {
-            let container = document.getElementById("imageContainer");
-
-            for (let i = 1; i <= 20; i++) {
-                let img = document.createElement("img");
-                img.src = `instrucao${i}.png`;
-                img.alt = `Instrução ${i}`;
-                img.onclick = function() {
-                    document.getElementById("lastImage").src = img.src;
-                    localStorage.setItem("lastImage", img.src);
-                };
-                container.appendChild(img);
-            }
-        }
-
-        // Mostrar ou ocultar as imagens ao clicar no botão "Instruções"
-        function toggleInstructions() {
-            let container = document.getElementById("imageContainer");
-            if (container.style.display === "none" || container.style.display === "") {
-                container.style.display = "block";
-            } else {
-                container.style.display = "none";
-            }
-        }
-
-        // Salvar dados (Última imagem e instruções)
-        function saveData() {
-            let instructionText = prompt("Digite uma instrução para salvar:");
-            if (instructionText) {
-                localStorage.setItem("savedInstructions", instructionText);
-            }
-        }
-
-        // Carregar dados salvos
-        window.onload = function() {
-            loadImages();
+        // Abrir instruções em tela cheia
+        function openInstructions() {
+            let lastImage = localStorage.getItem("lastImage") || "instrucao1.png";
+            let win = window.open("", "_blank", "fullscreen=yes");
             
-            let lastImage = localStorage.getItem("lastImage");
-            if (lastImage) {
-                document.getElementById("lastImage").src = lastImage;
-            } else {
-                document.getElementById("lastImage").src = "instrucao1.png"; // Imagem padrão
-            }
+            win.document.write(`
+                <html>
+                <head>
+                    <title>Instruções</title>
+                    <style>
+                        body {
+                            background-color: black;
+                            text-align: center;
+                            color: white;
+                            margin: 0;
+                            overflow: hidden;
+                        }
+                        .container {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            height: 100vh;
+                        }
+                        img {
+                            max-width: 100%;
+                            max-height: 80vh;
+                        }
+                        .button {
+                            background-color: cyan;
+                            color: black;
+                            border: none;
+                            padding: 10px 20px;
+                            font-size: 16px;
+                            cursor: pointer;
+                            margin: 5px;
+                        }
+                        .button:hover {
+                            background-color: lightblue;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <button class="button" onclick="prevImage()">Anterior</button>
+                        <img id="instructionImage" src="${lastImage}" alt="Instrução">
+                        <button class="button" onclick="nextImage()">Próxima</button>
+                        <button class="button" onclick="window.close()">Fechar</button>
+                    </div>
+
+                    <script>
+                        let currentIndex = parseInt(${lastImage.match(/\d+/) || 1});
+                        
+                        function updateImage() {
+                            document.getElementById("instructionImage").src = "instrucao" + currentIndex + ".png";
+                            localStorage.setItem("lastImage", "instrucao" + currentIndex + ".png");
+                        }
+
+                        function nextImage() {
+                            if (currentIndex < 20) {
+                                currentIndex++;
+                                updateImage();
+                            }
+                        }
+
+                        function prevImage() {
+                            if (currentIndex > 1) {
+                                currentIndex--;
+                                updateImage();
+                            }
+                        }
+                    </script>
+                </body>
+                </html>
+            `);
+        }
+
+        // Carregar última imagem ao iniciar
+        window.onload = function() {
+            let lastImage = localStorage.getItem("lastImage") || "instrucao1.png";
+            document.getElementById("lastImage").src = lastImage;
         };
     </script>
 </body>
