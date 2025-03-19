@@ -1,4 +1,4 @@
-let audio = new Audio("alarme.wav"); // Caminho para o arquivo de áudio
+let audio = new Audio("alarme.wav"); // Caminho relativo
 let currentImageIndex = 0; // Índice da última imagem visualizada
 
 // Função para iniciar o temporizador
@@ -31,7 +31,7 @@ function loadImages() {
 
     for (let i = 1; i <= 20; i++) {
         let img = document.createElement("img");
-        img.src = `imagens/instrucao${i}.png`; // Caminho para as imagens
+        img.src = `imagens/instrucao${i}.png`; // Caminho relativo
         img.alt = `Instrução ${i}`;
         container.appendChild(img);
     }
