@@ -5,46 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temporizador</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: black;
             color: cyan;
             text-align: center;
             font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        h1 {
-            font-size: 24px;
+
+        .timers-container {
+            display: flex;
+            flex: 1;
+            width: 100%;
         }
+
         .timer {
-            font-size: 48px;
-            margin: 20px;
+            flex: 1;
+            font-size: 10vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            border: 2px solid cyan;
         }
+
         .button {
             background-color: cyan;
             color: black;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 20px;
+            font-size: 24px;
             cursor: pointer;
-            margin-top: 10px;
+            width: 100%;
         }
+
         .button:hover {
             background-color: lightblue;
         }
     </style>
 </head>
 <body>
-    <h1>Temporizador</h1>
-
-    <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
-    <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
+    <div class="timers-container">
+        <div id="timer30" class="timer" onclick="startTimer(30, 'timer30')">30s</div>
+        <div id="timer60" class="timer" onclick="startTimer(60, 'timer60')">60s</div>
+    </div>
 
     <button class="button" onclick="openInstructions()">Instruções</button>
 
     <audio id="alarm" src="alarme.wav"></audio>
 
     <script>
-        // Temporizador
         function startTimer(seconds, elementId) {
             let timerElement = document.getElementById(elementId);
             let timeLeft = seconds;
@@ -61,11 +79,7 @@
             }, 1000);
         }
 
-        // Abrir instruções em tela cheia
         function openInstructions() {
-            let lastImage = localStorage.getItem("lastImage") || "instrucao1.png";
-            let currentIndex = parseInt(lastImage.match(/\d+/)) || 1;
-            
             let win = window.open("", "_blank", "fullscreen=yes");
 
             win.document.write(`
@@ -79,17 +93,22 @@
                             color: white;
                             margin: 0;
                             overflow: hidden;
-                        }
-                        .container {
                             display: flex;
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;
                             height: 100vh;
                         }
+                        .carousel {
+                            overflow-y: scroll;
+                            height: 80vh;
+                            width: 100%;
+                            scroll-snap-type: y mandatory;
+                        }
                         img {
                             max-width: 100%;
-                            max-height: 80vh;
+                            max-height: 100%;
+                            scroll-snap-align: start;
                         }
                         .button {
                             background-color: cyan;
@@ -106,34 +125,23 @@
                     </style>
                 </head>
                 <body>
-                    <div class="container">
-                        <button class="button" onclick="prevImage()">Anterior</button>
-                        <img id="instructionImage" src="instrucao${currentIndex}.png" alt="Instrução">
-                        <button class="button" onclick="nextImage()">Próxima</button>
-                        <button class="button" onclick="window.close()">Fechar</button>
+                    <button class="button" onclick="window.close()">Fechar</button>
+                    <div class="carousel" id="carousel">
                     </div>
-
                     <script>
-                        let currentIndex = ${currentIndex};
-                        
-                        function updateImage() {
-                            document.getElementById("instructionImage").src = "instrucao" + currentIndex + ".png";
-                            localStorage.setItem("lastImage", "instrucao" + currentIndex + ".png");
+                        const carousel = document.getElementById("carousel");
+
+                        for (let i = 1; i <= 20; i++) {
+                            let img = document.createElement("img");
+                            img.src = "instrucao" + i + ".png";
+                            carousel.appendChild(img);
                         }
 
-                        function nextImage() {
-                            if (currentIndex < 20) {
-                                currentIndex++;
-                                updateImage();
-                            }
-                        }
+                        carousel.scrollTop = localStorage.getItem("scrollPosition") || 0;
 
-                        function prevImage() {
-                            if (currentIndex > 1) {
-                                currentIndex--;
-                                updateImage();
-                            }
-                        }
+                        carousel.addEventListener("scroll", () => {
+                            localStorage.setItem("scrollPosition", carousel.scrollTop);
+                        });
                     <\/script>
                 </body>
                 </html>
