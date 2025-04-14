@@ -16,40 +16,41 @@ function startTimer(seconds, elementId) {
 
 function openInstructions() {
     let lastImage = localStorage.getItem("lastImage") || 1;
-
     let win = window.open("", "_blank", "fullscreen=yes");
 
     win.document.write(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Instruções</title>
-        <link rel="stylesheet" href="styles.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body class="instructions-body">
-        <div class="carousel" id="carousel"></div>
-        <button class="instructions-button" onclick="window.close()">FECHAR</button>
-        <script>
-            const carousel = document.getElementById("carousel");
-            
-            // Carrega 20 imagens de exemplo
-            for (let i = 1; i <= 20; i++) {
-                let img = document.createElement("img");
-                img.src = "instrucao" + i + ".png";
-                img.setAttribute("data-index", i);
-                carousel.appendChild(img);
-            }
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Instruções</title>
+            <link rel="stylesheet" href="styles.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body class="instructions-body">
+            <div class="carousel" id="carousel"></div>
+            <button class="instructions-button" onclick="window.close()">FECHAR</button>
 
-            // Restaura a posição de scroll salva
-            carousel.scrollTop = (localStorage.getItem("lastImage") - 1 || 0) * window.innerHeight;
+            <script>
+                const carousel = document.getElementById("carousel");
 
-            // Salva a posição de scroll quando o usuário navega
-            carousel.addEventListener("scroll", () => {
-                const currentImage = Math.round(carousel.scrollTop / window.innerHeight) + 1;
-                localStorage.setItem("lastImage", currentImage);
-            });
-        </script>
-    </body>
-    </html>
-`);
+                for (let i = 1; i <= 20; i++) {
+                    let img = document.createElement("img");
+                    img.src = "instrucao" + i + ".png";
+                    img.setAttribute("data-index", i);
+                    carousel.appendChild(img);
+                }
+
+                const lastIndex = parseInt(localStorage.getItem("lastImage")) || 1;
+                window.addEventListener("load", () => {
+                    carousel.scrollTop = (lastIndex - 1) * window.innerHeight;
+                });
+
+                carousel.addEventListener("scroll", () => {
+                    const currentImage = Math.round(carousel.scrollTop / window.innerHeight) + 1;
+                    localStorage.setItem("lastImage", currentImage);
+                });
+            <\/script>
+        </body>
+        </html>
+    `);
+}
