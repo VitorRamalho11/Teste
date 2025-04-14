@@ -18,6 +18,7 @@ body {
 }
 
 .timer {
+    color: cyan;
     flex: 1;
     font-size: 25vw;
     display: flex;
