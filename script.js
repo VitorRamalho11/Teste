@@ -20,39 +20,36 @@ function openInstructions() {
     let win = window.open("", "_blank", "fullscreen=yes");
 
     win.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Instruções</title>
-            <link rel="stylesheet" href="styles.css">
-        </head>
-        <body class="instructions-body">
-            <div class="carousel" id="carousel">
-            </div>
-            <button class="instructions-button" onclick="window.close()">Fechar</button>
-            <script>
-                const carousel = document.getElementById("carousel");
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Instruções</title>
+        <link rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body class="instructions-body">
+        <div class="carousel" id="carousel"></div>
+        <button class="instructions-button" onclick="window.close()">FECHAR</button>
+        <script>
+            const carousel = document.getElementById("carousel");
+            
+            // Carrega 20 imagens de exemplo
+            for (let i = 1; i <= 20; i++) {
+                let img = document.createElement("img");
+                img.src = "instrucao" + i + ".png";
+                img.setAttribute("data-index", i);
+                carousel.appendChild(img);
+            }
 
-                for (let i = 1; i <= 20; i++) {
-                    let img = document.createElement("img");
-                    img.src = "instrucao" + i + ".png";
-                    img.setAttribute("data-index", i);
-                    carousel.appendChild(img);
-                }
+            // Restaura a posição de scroll salva
+            carousel.scrollTop = (localStorage.getItem("lastImage") - 1 || 0) * window.innerHeight;
 
-                carousel.scrollTop = (lastImage - 1) * window.innerHeight;
-
-                carousel.addEventListener("scroll", () => {
-                    let images = document.querySelectorAll("img");
-                    images.forEach((img) => {
-                        let rect = img.getBoundingClientRect();
-                        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                            localStorage.setItem("lastImage", img.getAttribute("data-index"));
-                        }
-                    });
-                });
-            <\/script>
-        </body>
-        </html>
-    `);
-}
+            // Salva a posição de scroll quando o usuário navega
+            carousel.addEventListener("scroll", () => {
+                const currentImage = Math.round(carousel.scrollTop / window.innerHeight) + 1;
+                localStorage.setItem("lastImage", currentImage);
+            });
+        </script>
+    </body>
+    </html>
+`);
