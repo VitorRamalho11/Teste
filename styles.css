@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: sans-serif;
     background-color: black;
-    color: white;
+    color: cyan;
     height: 80vh;
 
 }
@@ -18,7 +18,6 @@ body {
 }
 
 .timer {
-    color: cyan;
     flex: 1;
     font-size: 25vw;
     display: flex;
