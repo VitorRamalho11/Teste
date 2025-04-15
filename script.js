@@ -54,3 +54,18 @@ function openInstructions() {
         </html>
     `);
 }
+carousel.scrollTop = (localStorage.getItem("lastImage") - 1 || 0) * window.innerHeight;
+
+// Carrega 20 imagens de exemplo
+for (let i = 1; i <= 20; i++) {
+    let img = document.createElement("img");
+    img.src = "instrucao" + i + ".png";
+    img.setAttribute("data-index", i);
+    carousel.appendChild(img);
+}
+
+// Aguarde o DOM atualizar antes de rolar até a última imagem
+setTimeout(() => {
+    const lastImageIndex = parseInt(localStorage.getItem("lastImage") || 1);
+    carousel.scrollTop = (lastImageIndex - 1) * window.innerHeight;
+}, 100);
