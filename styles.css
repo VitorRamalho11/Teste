@@ -3,13 +3,11 @@ body {
     font-family: sans-serif;
     background-color: black;
     color: cyan;
-
 }
 
 /* Temporizadores */
 .timers-container {
     display: flex;
-    flex: 1;
     width: 100%;
     height: 80vh;
     margin: 0;
@@ -31,17 +29,16 @@ body {
 
 /* Botão */
 .instructions-button {
-    flex: 1;
     background-color: cyan;
     color: black;
     border: none;
     font-size: 10vw;
     cursor: pointer;
     width: 100%;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80px;
 }
 
 .instructions-button:hover {
@@ -51,7 +48,6 @@ body {
 /* Janela de instruções */
 .instructions-body {
     background-color: black;
-    text-align: center;
     color: white;
     margin: 0;
     padding: 0;
@@ -60,33 +56,19 @@ body {
     flex-direction: column;
 }
 
+/* Galeria vertical com snap */
 .carousel {
-    flex: 4;
+    flex: 1;
     overflow-y: scroll;
     width: 100%;
     scroll-snap-type: y mandatory;
+    display: flex;
+    flex-direction: column;
 }
 
 .carousel img {
     width: 100%;
     height: 100vh;
-    object-fit: contain;
-    scroll-snap-align: start;
-}
-
-.carousel {
-    flex: 4;
-    overflow-y: scroll;
-    width: 100%;
-    height: 100%;
-    scroll-snap-type: y mandatory;
-    display: flex;
-    flex-direction: column; /* Empilha as imagens verticalmente */
-}
-
-.carousel img {
-    width: 100%;
-    height: 100vh; /* Cada imagem ocupa a tela inteira */
     object-fit: contain;
     scroll-snap-align: start;
 }
