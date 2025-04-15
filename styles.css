@@ -1,19 +1,30 @@
-body {
-    margin: 0;
-    font-family: sans-serif;
-    background-color: black;
-    color: cyan;
-}
-
-/* Temporizadores */
-.timers-container {
-    display: flex;
-    width: 100%;
-    height: 80vh;
+html, body {
+    height: 100vh;
     margin: 0;
     padding: 0;
+    background-color: black;
+    color: cyan;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Contêiner geral que ocupa 80% da altura */
+.app-container {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Temporizadores ocupam 70% da altura do container (80vh * 0.7 = 56vh) */
+.timers-container {
+    height: 70%;
+    display: flex;
+    width: 100%;
+}
+
+/* Cada temporizador ocupa metade do espaço horizontal */
 .timer {
     flex: 1;
     font-size: 25vw;
@@ -21,54 +32,18 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
-/* Botão */
+/* Botão ocupa os 30% restantes do container (80vh * 0.3 = 24vh) */
 .instructions-button {
+    height: 30%;
     background-color: cyan;
     color: black;
     border: none;
     font-size: 10vw;
     cursor: pointer;
-    width: 100%;
-    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.instructions-button:hover {
-    background-color: lightblue;
-}
-
-/* Janela de instruções */
-.instructions-body {
-    background-color: black;
-    color: white;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Galeria vertical com snap */
-.carousel {
-    flex: 1;
-    overflow-y: scroll;
     width: 100%;
-    scroll-snap-type: y mandatory;
-    display: flex;
-    flex-direction: column;
-}
-
-.carousel img {
-    width: 100%;
-    height: 100vh;
-    object-fit: contain;
-    scroll-snap-align: start;
 }
