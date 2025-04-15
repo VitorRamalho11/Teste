@@ -73,3 +73,20 @@ body {
     object-fit: contain;
     scroll-snap-align: start;
 }
+
+.carousel {
+    flex: 4;
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    display: flex;
+    flex-direction: column; /* Empilha as imagens verticalmente */
+}
+
+.carousel img {
+    width: 100%;
+    height: 100vh; /* Cada imagem ocupa a tela inteira */
+    object-fit: contain;
+    scroll-snap-align: start;
+}
