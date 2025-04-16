@@ -3,18 +3,21 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: black;
-    color: pink;
+    color: cyan;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Arial, sans-serif; /* Added for better font consistency */
 }
 
 /* Contêiner geral que ocupa 80% da altura */
 .app-container {
     height: 80vh;
     width: 100%;
+    max-width: 1000px; /* Added to prevent excessive width on large screens */
     display: flex;
     flex-direction: column;
+    box-sizing: border-box; /* Ensures padding is included in height/width */
 }
 
 /* Temporizadores ocupam 70% da altura do container (80vh * 0.7 = 56vh) */
@@ -22,16 +25,23 @@ html, body {
     height: 70%;
     display: flex;
     width: 100%;
+    box-sizing: border-box;
 }
 
 /* Cada temporizador ocupa metade do espaço horizontal */
 .timer {
     flex: 1;
-    font-size: 25vw;
+    font-size: min(25vw, 200px); /* Added max size limit */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    user-select: none; /* Prevents text selection when clicking */
+    transition: all 0.2s ease; /* Smooth hover effect */
+}
+
+.timer:hover {
+    background-color: rgba(0, 255, 255, 0.1); /* Subtle hover effect */
 }
 
 /* Botão ocupa os 30% restantes do container (80vh * 0.3 = 24vh) */
@@ -40,10 +50,36 @@ html, body {
     background-color: cyan;
     color: black;
     border: none;
-    font-size: 10vw;
+    font-size: min(10vw, 80px); /* Added max size limit */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    box-sizing: border-box;
+    padding: 20px; /* Added some padding */
+    transition: all 0.2s ease; /* Smooth hover effect */
+}
+
+.instructions-button:hover {
+    background-color: #00e6e6; /* Slightly darker on hover */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    .app-container {
+        height: 90vh; /* Slightly taller on small screens */
+    }
+    
+    .timers-container {
+        flex-direction: column; /* Stack timers vertically on small screens */
+    }
+    
+    .timer {
+        font-size: min(20vw, 150px); /* Smaller font on mobile */
+    }
+    
+    .instructions-button {
+        font-size: min(8vw, 60px); /* Smaller button text on mobile */
+    }
 }
