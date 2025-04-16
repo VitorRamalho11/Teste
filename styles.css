@@ -3,24 +3,22 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: black;
-    color: cyan;
+    color: pink;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif; /* Added for better font consistency */
+    font-family: Arial, sans-serif;
 }
 
-/* Contêiner geral que ocupa 80% da altura */
 .app-container {
     height: 80vh;
     width: 100%;
-    max-width: 1000px; /* Added to prevent excessive width on large screens */
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box; /* Ensures padding is included in height/width */
+    box-sizing: border-box;
 }
 
-/* Temporizadores ocupam 70% da altura do container (80vh * 0.7 = 56vh) */
 .timers-container {
     height: 70%;
     display: flex;
@@ -28,58 +26,52 @@ html, body {
     box-sizing: border-box;
 }
 
-/* Cada temporizador ocupa metade do espaço horizontal */
 .timer {
     flex: 1;
-    font-size: min(25vw, 200px); /* Added max size limit */
+    font-size: clamp(60px, 20vw, 200px); /* Responsivo sem zoom */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    user-select: none; /* Prevents text selection when clicking */
-    transition: all 0.2s ease; /* Smooth hover effect */
+    user-select: none;
+    transition: all 0.2s ease;
 }
 
 .timer:hover {
-    background-color: rgba(0, 255, 255, 0.1); /* Subtle hover effect */
+    background-color: rgba(0, 255, 255, 0.1);
 }
 
-/* Botão ocupa os 30% restantes do container (80vh * 0.3 = 24vh) */
 .instructions-button {
     height: 30%;
     background-color: cyan;
     color: black;
     border: none;
-    font-size: min(10vw, 80px); /* Added max size limit */
+    font-size: clamp(24px, 6vw, 80px); /* Responsivo sem zoom */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px; /* Added some padding */
-    transition: all 0.2s ease; /* Smooth hover effect */
+    padding: 20px;
+    transition: all 0.2s ease;
 }
 
 .instructions-button:hover {
-    background-color: #00e6e6; /* Slightly darker on hover */
+    background-color: #00e6e6;
 }
 
-/* Media query for smaller screens */
 @media (max-width: 600px) {
     .app-container {
-        height: 90vh; /* Slightly taller on small screens */
+        height: 90vh;
     }
-    
     .timers-container {
-        flex-direction: column; /* Stack timers vertically on small screens */
+        flex-direction: column;
     }
-    
     .timer {
-        font-size: min(20vw, 150px); /* Smaller font on mobile */
+        font-size: clamp(40px, 15vw, 150px);
     }
-    
     .instructions-button {
-        font-size: min(8vw, 60px); /* Smaller button text on mobile */
+        font-size: clamp(20px, 5vw, 60px);
     }
 }
