@@ -3,75 +3,87 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: black;
-    color: pink;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
+/* Container principal (simulando a tela do Kivy) */
 .app-container {
-    height: 80vh;
-    width: 100%;
-    max-width: 1000px;
+    width: 360px;
+    height: 640px;
+    background-color: black;
     display: flex;
     flex-direction: column;
+    padding: 10px;
     box-sizing: border-box;
 }
 
+/* Container dos temporizadores (horizontal) */
 .timers-container {
-    height: 70%;
     display: flex;
-    width: 100%;
-    box-sizing: border-box;
+    flex: 0.8;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
+/* Estilo dos labels dos temporizadores */
 .timer {
     flex: 1;
-    font-size: clamp(60px, 20vw, 200px); /* Responsivo sem zoom */
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 96px; /* Tamanho fixo similar ao Kivy */
+    color: cyan;
     cursor: pointer;
     user-select: none;
-    transition: all 0.2s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 }
 
-.timer:hover {
-    background-color: rgba(0, 255, 255, 0.1);
-}
-
+/* Botão de instruções */
 .instructions-button {
-    height: 30%;
+    flex: 0.2;
     background-color: cyan;
     color: black;
     border: none;
-    font-size: clamp(24px, 6vw, 80px); /* Responsivo sem zoom */
+    font-size: 24px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    transition: all 0.2s ease;
+    border-radius: 5px;
+    transition: background-color 0.2s;
 }
 
 .instructions-button:hover {
-    background-color: #00e6e6;
+    background-color: #00e6e6; /* Efeito hover similar ao Kivy */
 }
 
-@media (max-width: 600px) {
+/* Carrossel de instruções (se aplicável) */
+.carousel {
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Responsividade (opcional) */
+@media (max-width: 400px) {
     .app-container {
-        height: 90vh;
-    }
-    .timers-container {
-        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        padding: 5px;
     }
     .timer {
-        font-size: clamp(40px, 15vw, 150px);
-    }
-    .instructions-button {
-        font-size: clamp(20px, 5vw, 60px);
+        font-size: 15vw; /* Adaptável em telas muito pequenas */
     }
 }
