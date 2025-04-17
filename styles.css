@@ -1,59 +1,79 @@
-/* Reset e configurações básicas */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    touch-action: manipulation;
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
-/* Container principal */
-.timer-container {
-  flex: 1;
-  display: flex;
-  width: 100%;
+.timers-container {
+    flex: 1;
+    display: flex;
+    width: 100%;
 }
 
-/* Temporizador esquerdo (30s) */
-.timer-left {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 25vw; /* Tamanho extremamente grande e responsivo */
-  color: cyan;
+.timer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25vh;
+    color: cyan;
+    cursor: pointer;
+    user-select: none;
 }
 
-/* Temporizador direito (60s) */
-.timer-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 25vw; /* Tamanho extremamente grande e responsivo */
-  color: cyan;
+.instructions-button {
+    width: 100%;
+    height: 15vh;
+    min-height: 60px;
+    background-color: cyan;
+    color: black;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* Botão de instruções */
-.instructions-btn {
-  width: 100%;
-  height: 15vh; /* Altura generosa para toque fácil */
-  min-height: 60px;
-  background-color: cyan;
-  color: black;
-  border: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
+/* Estilos para a janela de instruções */
+.instructions-window {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel {
+    flex: 1;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    scroll-snap-align: start;
+}
+
+.close-button {
+    width: 100%;
+    height: 15vh;
+    min-height: 60px;
+    background-color: cyan;
+    color: black;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
 }
