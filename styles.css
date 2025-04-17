@@ -3,32 +3,31 @@
     padding: 0;
     box-sizing: border-box;
     touch-action: manipulation;
+    -webkit-text-size-adjust: 100%; /* Previne zoom no iOS */
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed; /* Previne scroll indesejado */
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
     background-color: black;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
-
-.app-container {
-    width: 100%;
-    height: 100%;
-    max-width: 360px;
-    max-height: 640px;
-    display: flex;
     flex-direction: column;
+    font-family: Arial, sans-serif;
+    user-select: none;
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
 .timers-container {
     flex: 1;
     display: flex;
-    width: 100%;
+    width: 100vw;
+    height: calc(100vh - 60px); /* Altura total menos o botão */
 }
 
 .timer {
@@ -36,55 +35,35 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25vh;
+    font-size: 25vmin; /* Usa vmin para melhor responsividade */
     color: cyan;
-    cursor: pointer;
-    user-select: none;
+    overflow: hidden;
+    min-width: 0; /* Permite que o texto reduza */
 }
 
 .instructions-button {
-    width: 100%;
+    width: 100vw;
     height: 60px;
     background-color: cyan;
     color: black;
     border: none;
     font-size: 1.5rem;
     font-weight: bold;
-    cursor: pointer;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
 }
 
-/* Estilo para a janela de instruções */
+/* Janela de instruções */
 .instructions-window {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: black;
+    z-index: 100;
     display: flex;
     flex-direction: column;
-}
-
-.carousel {
-    flex: 1;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-}
-
-.carousel img {
-    width: 100%;
-    height: 100vh;
-    object-fit: contain;
-    scroll-snap-align: start;
-}
-
-.close-button {
-    width: 100%;
-    height: 60px;
-    background-color: cyan;
-    color: black;
-    border: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
 }
