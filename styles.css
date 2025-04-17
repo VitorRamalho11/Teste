@@ -1,56 +1,59 @@
+/* Reset e configurações básicas */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
 }
 
-/* Container principal (simula a tela do Kivy) */
-.app-container {
-    width: 360px;
-    height: 640px;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
+/* Container principal */
+.timer-container {
+  flex: 1;
+  display: flex;
+  width: 100%;
 }
 
-/* Container dos temporizadores (ocupa quase toda a tela) */
-.timers-container {
-    flex: 1; /* Ocupa todo espaço disponível */
-    display: flex;
-    gap: 10px;
-    padding: 10px;
+/* Temporizador esquerdo (30s) */
+.timer-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25vw; /* Tamanho extremamente grande e responsivo */
+  color: cyan;
 }
 
-/* Estilo dos números grandes (30s e 60s) */
-.timer {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 120px; /* Tamanho enorme */
-    color: cyan;
-    cursor: pointer;
-    user-select: none;
+/* Temporizador direito (60s) */
+.timer-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25vw; /* Tamanho extremamente grande e responsivo */
+  color: cyan;
 }
 
-/* Botão de instruções (fixo embaixo) */
-.instructions-button {
-    background-color: cyan;
-    color: black;
-    border: none;
-    font-size: 50px;
-    font-weight: bold;
-    width: 100%;
-    height: 56px;
-    cursor: pointer;
+/* Botão de instruções */
+.instructions-btn {
+  width: 100%;
+  height: 15vh; /* Altura generosa para toque fácil */
+  min-height: 60px;
+  background-color: cyan;
+  color: black;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
 }
