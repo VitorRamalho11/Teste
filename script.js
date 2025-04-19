@@ -1,67 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Elementos da página principal
+    // Elementos DOM
     const timer30 = document.getElementById('timer30');
     const timer60 = document.getElementById('timer60');
-    const instructionsBtn = document.querySelector('.instructions-button');
+    const btnInstructions = document.querySelector('.btn-instructions');
+    const btnClose = document.querySelector('.btn-close');
+    const mainScreen = document.querySelector('.main-screen');
+    const instructionsScreen = document.querySelector('.instructions-screen');
+    const carousel = document.getElementById('carousel');
     const alarm = document.getElementById('alarm');
+
+    // Variáveis de controle
     let activeTimers = {};
 
-    // Event listeners
-    timer30.addEventListener('click', () => startTimer(30, 'timer30'));
-    timer60.addEventListener('click', () => startTimer(60, 'timer60'));
-    instructionsBtn.addEventListener('click', openInstructions);
-
-    function startTimer(seconds, elementId) {
-        // Para o temporizador existente se houver
-        if (activeTimers[elementId]) {
-            clearInterval(activeTimers[elementId]);
+    // Inicia temporizador
+    function startTimer(seconds, element) {
+        if (activeTimers[element.id]) {
+            clearInterval(activeTimers[element.id]);
         }
-        
-        let timerElement = document.getElementById(elementId);
-        let timeLeft = seconds;
-        timerElement.textContent = timeLeft + "s";
 
-        activeTimers[elementId] = setInterval(() => {
+        let timeLeft = seconds;
+        element.textContent = timeLeft;
+
+        activeTimers[element.id] = setInterval(() => {
             timeLeft--;
-            timerElement.textContent = timeLeft + "s";
+            element.textContent = timeLeft;
 
             if (timeLeft <= 0) {
-                clearInterval(activeTimers[elementId]);
+                clearInterval(activeTimers[element.id]);
                 alarm.play();
-                timerElement.textContent = seconds + "s";
-                delete activeTimers[elementId];
+                element.textContent = seconds;
+                delete activeTimers[element.id];
             }
         }, 1000);
     }
 
-    function openInstructions() {
-        // Cria div para a janela de instruções
-        const instructionsDiv = document.createElement('div');
-        instructionsDiv.className = 'instructions-window';
+    // Carrega instruções diretamente do diretório atual
+    function loadInstructions() {
+        carousel.innerHTML = '';
         
-        // Cria carrossel
-        const carousel = document.createElement('div');
-        carousel.className = 'carousel';
-        
-        // Adiciona imagens (20 no total)
         for (let i = 1; i <= 20; i++) {
+            const slide = document.createElement('div');
+            slide.className = 'instruction-slide';
+            
             const img = document.createElement('img');
-            img.src = `instrucao${i}.png`;
+            img.src = `instrucao${i}.jpg`; // Busca diretamente no diretório raiz
             img.alt = `Instrução ${i}`;
-            carousel.appendChild(img);
+            
+            slide.appendChild(img);
+            carousel.appendChild(slide);
         }
         
-        // Cria botão de fechar
-        const closeBtn = document.createElement('button');
-        closeBtn.className = 'close-button';
-        closeBtn.textContent = 'FECHAR';
-        closeBtn.addEventListener('click', () => {
-            document.body.removeChild(instructionsDiv);
-        });
-        
-        // Monta a estrutura
-        instructionsDiv.appendChild(carousel);
-        instructionsDiv.appendChild(closeBtn);
-        document.body.appendChild(instructionsDiv);
+        mainScreen.classList.add('hidden');
+        instructionsScreen.classList.remove('hidden');
     }
+
+    // Event Listeners
+    timer30.addEventListener('click', () => startTimer(30, timer30));
+    timer60.addEventListener('click', () => startTimer(60, timer60));
+    btnInstructions.addEventListener('click', loadInstructions);
+    btnClose.addEventListener('click', () => {
+        instructionsScreen.classList.add('hidden');
+        mainScreen.classList.remove('hidden');
+    });
 });
