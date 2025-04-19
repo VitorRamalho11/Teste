@@ -2,20 +2,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  background-color: #000;
-  position: fixed;
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: cyan;
+  font-family: sans-serif;
 }
 
-.main-screen,
-.instructions-screen {
+.main-screen, .instruction-screen {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -23,59 +20,45 @@ body {
   left: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 .timers {
-  width: 100%;
-  height: calc(100% - 70px);
   display: flex;
+  height: 80%;
 }
 
 .timer {
   flex: 1;
+  font-size: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30vmin;
-  color: #0ff;
-  cursor: pointer;
+  color: cyan;
   user-select: none;
+  cursor: pointer;
 }
 
-.btn-instructions,
-.btn-close {
+.btn-instructions, .btn-voltar {
   width: 100%;
   height: 70px;
-  background-color: #0ff;
-  color: #000;
-  border: none;
+  background-color: cyan;
+  color: black;
   font-size: 22px;
   font-weight: bold;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  border: none;
 }
 
 .carousel {
-  width: 100%;
-  height: calc(100% - 70px);
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-}
-
-.instruction-slide {
-  width: 100%;
-  height: 100vh;
-  scroll-snap-align: start;
+  height: 80%;
+  overflow-y: scroll;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  scroll-behavior: smooth;
 }
 
-.instruction-slide img {
-  max-width: 100%;
-  max-height: 90vh;
-  object-fit: contain;
-}
-
-.hidden {
-  display: none;
+.carousel-img {
+  width: 100%;
+  height: auto;
 }
