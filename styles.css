@@ -31,7 +31,7 @@ body, html {
 
 .timer {
   flex: 1;
-  font-size: 60px;
+  font-size: 18vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,12 +40,12 @@ body, html {
   cursor: pointer;
 }
 
-.btn-instructions, .btn-voltar {
+.btn {
   width: 100%;
-  height: 70px;
+  height: 20%;
   background-color: cyan;
   color: black;
-  font-size: 22px;
+  font-size: 7vw;
   font-weight: bold;
   border: none;
 }
