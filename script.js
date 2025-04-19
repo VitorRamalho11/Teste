@@ -1,76 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const timer30 = document.getElementById('timer30');
-  const timer60 = document.getElementById('timer60');
-  const btnInstructions = document.querySelector('.btn-instructions');
-  const btnClose = document.querySelector('.btn-close');
-  const mainScreen = document.querySelector('.main-screen');
-  const instructionsScreen = document.querySelector('.instructions-screen');
-  const carousel = document.getElementById('carousel');
-  const alarm = document.getElementById('alarm');
+let timer30 = document.getElementById("timer30");
+let timer60 = document.getElementById("timer60");
 
-  let activeTimers = {};
-  const defaultTimes = { timer30: 30, timer60: 60 };
-  let lastScrollY = 0;
+let time30 = 30;
+let time60 = 60;
+let interval30 = null;
+let interval60 = null;
 
-  function startOrResetTimer(seconds, element) {
-    const id = element.id;
+const alarm = document.getElementById("alarm");
 
-    if (activeTimers[id]) {
-      clearInterval(activeTimers[id]);
-      element.textContent = `${seconds}`;
-      delete activeTimers[id];
-      return;
-    }
+function resetTimer(timer, label, time, intervalVar) {
+  clearInterval(intervalVar);
+  label.textContent = time + "s";
+  return null;
+}
 
-    let timeLeft = seconds;
-    element.textContent = timeLeft;
-
-    activeTimers[id] = setInterval(() => {
-      timeLeft--;
-      element.textContent = timeLeft;
-
-      if (timeLeft <= 0) {
-        clearInterval(activeTimers[id]);
-        alarm.play();
-        element.textContent = seconds;
-        delete activeTimers[id];
-      }
-    }, 1000);
+timer30.addEventListener("click", () => {
+  if (interval30) {
+    interval30 = resetTimer(timer30, timer30, 30, interval30);
+    return;
   }
-
-  function loadInstructions() {
-    carousel.innerHTML = '';
-
-    for (let i = 1; i <= 20; i++) {
-      const slide = document.createElement('div');
-      slide.className = 'instruction-slide';
-
-      const img = document.createElement('img');
-      img.src = `instrucao${i}.png`;
-      img.alt = `Instrução ${i}`;
-
-      slide.appendChild(img);
-      carousel.appendChild(slide);
+  let current = 30;
+  timer30.textContent = current + "s";
+  interval30 = setInterval(() => {
+    current--;
+    timer30.textContent = current + "s";
+    if (current <= 0) {
+      clearInterval(interval30);
+      interval30 = null;
+      alarm.play();
+      timer30.textContent = "30s";
     }
-
-    mainScreen.classList.add('hidden');
-    instructionsScreen.classList.remove('hidden');
-
-    // Volta para a última posição visualizada
-    setTimeout(() => {
-      carousel.scrollTop = lastScrollY;
-    }, 50);
-  }
-
-  timer30.addEventListener('click', () => startOrResetTimer(defaultTimes.timer30, timer30));
-  timer60.addEventListener('click', () => startOrResetTimer(defaultTimes.timer60, timer60));
-
-  btnInstructions.addEventListener('click', loadInstructions);
-
-  btnClose.addEventListener('click', () => {
-    // Salva a posição atual
-    lastScrollY = carousel.scrollTop;
-    instructionsScreen.classList.add('hidden');
-    mainScreen.classList.remove('hidden');
-  });
+  }, 1000);
 });
+
+timer60.addEventListener("click", () => {
+  if (interval60) {
+    interval60 = resetTimer(timer60, timer60, 60, interval60);
+    return;
+  }
+  let current = 60;
+  timer60.textContent = current + "s";
+  interval60 = setInterval(() => {
+    current--;
+    timer60.textContent = current + "s";
+    if (current <= 0) {
+      clearInterval(interval60);
+      interval60 = null;
+      alarm.play();
+      timer60.textContent = "60s";
+    }
+  }, 1000);
+});
+
+function showInstructions() {
+  document.getElementById("main-screen").classList.add("hidden");
+  document.getElementById("instruction-screen").classList.remove("hidden");
+}
+
+function showMain() {
+  document.getElementById("instruction-screen").classList.add("hidden");
+  document.getElementById("main-screen").classList.remove("hidden");
+}
