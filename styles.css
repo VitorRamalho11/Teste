@@ -31,7 +31,7 @@ body, html {
 
 .timer {
   flex: 1;
-  font-size: 18vw;
+  font-size: 30vw;
   display: flex;
   justify-content: center;
   align-items: center;
