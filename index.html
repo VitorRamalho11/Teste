@@ -7,12 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="timers-container">
-        <div id="timer30" class="timer">30</div>
-        <div id="timer60" class="timer">60</div>
+    <!-- Tela Principal -->
+    <div class="main-screen">
+        <div class="timers">
+            <div id="timer30" class="timer">30</div>
+            <div id="timer60" class="timer">60</div>
+        </div>
+        <button class="btn-instructions">Instruções</button>
     </div>
 
-    <button class="instructions-button">Instruções</button>
+    <!-- Tela de Instruções -->
+    <div class="instructions-screen hidden">
+        <div class="carousel" id="carousel"></div>
+        <button class="btn-close">Voltar</button>
+    </div>
 
     <audio id="alarm" src="alarme.wav"></audio>
 
