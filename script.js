@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       slide.className = 'instruction-slide';
 
       const img = document.createElement('img');
-      img.src = `instrucao${i}.jpg`; // As imagens devem estar no mesmo diretório
+      img.src = `instrucao${i}.png`; // Agora buscando arquivos .png
       img.alt = `Instrução ${i}`;
 
       slide.appendChild(img);
