@@ -2,25 +2,31 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Temporizador</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="main-screen">
+  <div id="main-screen" class="main-screen">
     <div class="timers">
-      <div id="timer30" class="timer">30</div>
-      <div id="timer60" class="timer">60</div>
+      <div id="timer30" class="timer">30s</div>
+      <div id="timer60" class="timer">60s</div>
     </div>
-    <button class="btn-instructions">Instruções</button>
+    <button class="btn-instructions" onclick="showInstructions()">Instruções</button>
   </div>
 
-  <div class="instructions-screen hidden">
-    <div class="carousel" id="carousel"></div>
-    <button class="btn-close">Voltar</button>
+  <div id="instruction-screen" class="instruction-screen hidden">
+    <div class="carousel" id="carousel">
+      <!-- Adicione suas imagens instrucao1.png até instrucao20.png -->
+      <img src="instrucao1.png" class="carousel-img" />
+      <img src="instrucao2.png" class="carousel-img" />
+      <!-- Continue até instrucao20.png -->
+    </div>
+    <button class="btn-voltar" onclick="showMain()">Voltar</button>
   </div>
 
-  <audio id="alarm" src="alarme.wav"></audio>
+  <audio id="alarm" src="alarme.wav" preload="auto"></audio>
+
   <script src="script.js"></script>
 </body>
 </html>
