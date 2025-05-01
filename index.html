@@ -16,34 +16,21 @@
   </div>
 
   <div id="instruction-screen" class="instruction-screen hidden">
-    <div class="carousel" id="carousel">
-      <!-- 20 imagens de instrução -->
-      <img src="instrucao1.png" class="carousel-img" />
-      <img src="instrucao2.png" class="carousel-img" />
-      <img src="instrucao3.png" class="carousel-img" />
-      <img src="instrucao4.png" class="carousel-img" />
-      <img src="instrucao5.png" class="carousel-img" />
-      <img src="instrucao6.png" class="carousel-img" />
-      <img src="instrucao7.png" class="carousel-img" />
-      <img src="instrucao8.png" class="carousel-img" />
-      <img src="instrucao9.png" class="carousel-img" />
-      <img src="instrucao10.png" class="carousel-img" />
-      <img src="instrucao11.png" class="carousel-img" />
-      <img src="instrucao12.png" class="carousel-img" />
-      <img src="instrucao13.png" class="carousel-img" />
-      <img src="instrucao14.png" class="carousel-img" />
-      <img src="instrucao15.png" class="carousel-img" />
-      <img src="instrucao16.png" class="carousel-img" />
-      <img src="instrucao17.png" class="carousel-img" />
-      <img src="instrucao18.png" class="carousel-img" />
-      <img src="instrucao19.png" class="carousel-img" />
-      <img src="instrucao20.png" class="carousel-img" />
-    </div>
+    <div class="carousel" id="carousel"></div>
     <button class="btn" onclick="showMain()">Voltar</button>
   </div>
 
   <audio id="alarm" src="alarme.wav" preload="auto"></audio>
 
+  <script>
+    const carousel = document.getElementById("carousel");
+    for (let i = 1; i <= 39; i++) {
+      const img = document.createElement("img");
+      img.src = `instrucao${i}.png`;
+      img.className = "carousel-img";
+      carousel.appendChild(img);
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
