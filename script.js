@@ -1,6 +1,6 @@
-// Carrega as imagens do carrossel (21 a 48)
+// Carrega as imagens do carrossel (21 a 51)
 const carousel = document.getElementById("carousel");
-for (let i = 21; i <= 53; i++) {
+for (let i = 21; i <= 51; i++) {
   const img = document.createElement("img");
   img.src = `instrucao${i}.png`;
   img.className = "carousel-img";
@@ -61,7 +61,7 @@ timer60.addEventListener("click", () => {
   }, 1000);
 });
 
-// Funções para alternar entre telas
+// Alterna entre telas
 function showInstructions() {
   document.getElementById("main-screen").classList.add("hidden");
   document.getElementById("instruction-screen").classList.remove("hidden");
