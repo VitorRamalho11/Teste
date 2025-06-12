@@ -1,6 +1,6 @@
 // Carrega as imagens do carrossel (21 a 51)
 const carousel = document.getElementById("carousel");
-for (let i = 21; i <= 53; i++) {
+for (let i = 21; i <= 43; i++) {
   const img = document.createElement("img");
   img.src = `instrucao${i}.png`;
   img.className = "carousel-img";
