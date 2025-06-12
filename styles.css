@@ -33,10 +33,10 @@ body, html {
 .timer {
   flex: 1;
   font-size: 30vw;
-  display: cyan;
+  display: flex;
   justify-content: center;
   align-items: center;
-  color: pink;
+  color: cyan;
   user-select: none;
   cursor: pointer;
   width: 100%;
@@ -63,4 +63,15 @@ body, html {
 .carousel-img {
   width: 100%;
   height: auto;
+}
+
+.extra-btn {
+  position: absolute;
+  background-color: cyan;
+  color: black;
+  font-size: 6vw;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
 }
