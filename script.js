@@ -1,8 +1,7 @@
-// Carrega as imagens do carrossel (21 a 42)
 const carousel = document.getElementById("carousel");
 const imageElements = [];
 
-for (let i = 21; i <= 46; i++) {
+for (let i = 21; i <= 47; i++) {
   const img = document.createElement("img");
   img.src = `instrucao${i}.png`;
   img.className = "carousel-img";
@@ -11,7 +10,6 @@ for (let i = 21; i <= 46; i++) {
   carousel.appendChild(img);
 }
 
-// Rolagem direta para imagem específica
 function scrollToImage(num) {
   const target = document.getElementById(`img${num}`);
   if (target) {
@@ -19,7 +17,6 @@ function scrollToImage(num) {
   }
 }
 
-// Temporizadores
 let timer30 = document.getElementById("timer30");
 let timer60 = document.getElementById("timer60");
 let interval30 = null;
