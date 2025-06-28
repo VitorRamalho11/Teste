@@ -1,7 +1,7 @@
 const carousel = document.getElementById("carousel");
 const imageElements = [];
 
-for (let i = 21; i <= 47; i++) {
+for (let i = 1; i <= 47; i++) {
   const img = document.createElement("img");
   img.src = `instrucao${i}.png`;
   img.className = "carousel-img";
